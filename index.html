@@ -25,15 +25,15 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Barlow,system-ui,sans-serif;overflow-x:hidden}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 a{color:var(--gold2)}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 h1,h2,h3{font-family:"Lilita One",system-ui,sans-serif;font-weight:400;letter-spacing:.5px;margin:0}
 h2{font-size:clamp(28px,4vw,40px);color:var(--gold2)}
 
 /* hero */
-.hero{position:relative;min-height:92vh;display:flex;align-items:center;
-  background:linear-gradient(180deg,rgba(15,29,18,.15) 0%,rgba(15,29,18,.35) 55%,var(--bg) 100%),url(img/hero.jpg) center 35%/cover no-repeat}
+.hero{position:relative;min-height:min(88vh,860px);display:flex;align-items:center;
+  background:linear-gradient(180deg,rgba(15,29,18,0) 58%,var(--bg) 99%),linear-gradient(90deg,rgba(10,20,12,.7) 0%,rgba(10,20,12,.32) 42%,rgba(10,20,12,0) 68%),linear-gradient(180deg,rgba(15,29,18,.1),rgba(15,29,18,.25)),url(img/hero.jpg) center 35%/cover no-repeat}
 .hero .wrap{padding-top:64px;padding-bottom:64px;width:100%}
 .hero-card{max-width:560px}
 .logo{width:min(520px,90vw);filter:drop-shadow(0 8px 24px rgba(0,0,0,.55))}
@@ -56,16 +56,17 @@ section{padding:72px 0}
 .feat{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:22px}
 .feat h3{font-size:22px;color:var(--gold2);margin-bottom:6px}
 .feat p{margin:0;color:var(--soft)}
-.feat .ico{font-size:28px;margin-bottom:8px}
+.feat .ico{width:56px;height:56px;margin-bottom:10px;border-radius:12px;box-shadow:0 0 0 1px var(--line)}
 
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:30px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:30px}
+.gallery img{aspect-ratio:16/9;width:100%;object-fit:cover}
 .gallery figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--panel)}
 .gallery figcaption{padding:10px 14px;color:var(--soft);font-size:15px}
 
 .worlds{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:30px}
-.world{position:relative;border-radius:var(--r);overflow:hidden;min-height:240px;display:flex;align-items:flex-end;border:1px solid var(--line)}
+.world{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:16/9;display:flex;align-items:flex-end;border:1px solid var(--line)}
 .world img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.world div{position:relative;width:100%;padding:18px;background:linear-gradient(0deg,rgba(10,20,12,.92),rgba(10,20,12,0))}
+.world div{position:relative;width:100%;padding:56px 18px 16px;background:linear-gradient(0deg,rgba(8,16,10,.96) 0%,rgba(8,16,10,.8) 55%,rgba(8,16,10,0) 100%);text-shadow:0 1px 6px rgba(0,0,0,.9)}
 .world h3{font-size:24px;color:var(--gold2)}
 .world p{margin:2px 0 0;color:var(--soft)}
 
@@ -78,7 +79,11 @@ footer .row{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-betw
 footer nav{display:flex;flex-wrap:wrap;gap:18px}
 footer a{color:var(--soft);text-decoration:none}
 footer a:hover{color:var(--gold2)}
-@media (max-width:600px){ section{padding:52px 0} .hero{min-height:80vh} }
+@media (max-width:640px){ section{padding:48px 0} .hero{min-height:auto;background-position:30% 35%} .hero .wrap{padding-top:40px;padding-bottom:40px}
+  .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,12,.35) 70%,rgba(10,20,12,0))} .hero .wrap{position:relative}
+  .gallery{grid-template-columns:1fr} .features{gap:12px}
+  .feat{display:grid;grid-template-columns:56px 1fr;column-gap:14px;padding:16px} .feat .ico{grid-row:span 2;margin:0} .feat h3{align-self:end;margin:0}
+  .world{aspect-ratio:4/3} }
 </style>
 </head>
 <body>
@@ -100,15 +105,15 @@ footer a:hover{color:var(--gold2)}
   </div>
 </header>
 
-<section id="game">
+<section id="game" style="padding-top:24px">
   <div class="wrap">
     <h2>A stealth assassin in a living jungle</h2>
     <p class="intro">Every guard has eyes and ears. Run and they hear you; stand in their sight and the “?” turns into “!” fast. Patience, timing and the wooden scaffolds of the jungle are your weapons.</p>
     <div class="features">
-      <div class="feat"><div class="ico" aria-hidden="true">🌿</div><h3>Hide</h3><p>Melt into the bushes, sneak low and quiet, dive into the swamp to vanish beneath the surface.</p></div>
-      <div class="feat"><div class="ico" aria-hidden="true">🪢</div><h3>Hang</h3><p>Dangle beneath a walkway while a patrol steps over your hands, then pull him down into the dark.</p></div>
-      <div class="feat"><div class="ico" aria-hidden="true">🗡️</div><h3>Strike</h3><p>Silent takedowns from behind, from above and from below. Take a whole squad, one by one.</p></div>
-      <div class="feat"><div class="ico" aria-hidden="true">🌴</div><h3>Run the canopy</h3><p>Leap the scaffolds, climb lianas, swing across chasms, wall-jump and roll out of the drop.</p></div>
+      <div class="feat"><img class="ico" src="img/ic-hide.png" alt="" width="56" height="56"><h3>Hide</h3><p>Melt into the bushes, sneak low and quiet, dive into the swamp to vanish beneath the surface.</p></div>
+      <div class="feat"><img class="ico" src="img/ic-hang.png" alt="" width="56" height="56"><h3>Hang</h3><p>Dangle beneath a walkway while a patrol steps over your hands, then pull him down into the dark.</p></div>
+      <div class="feat"><img class="ico" src="img/ic-strike.png" alt="" width="56" height="56"><h3>Strike</h3><p>Silent takedowns from behind, from above and from below. Take a whole squad, one by one.</p></div>
+      <div class="feat"><img class="ico" src="img/ic-run.png" alt="" width="56" height="56"><h3>Run the canopy</h3><p>Leap the scaffolds, climb lianas, swing across chasms, wall-jump and roll out of the drop.</p></div>
     </div>
   </div>
 </section>
@@ -130,8 +135,8 @@ footer a:hover{color:var(--gold2)}
   <div class="wrap">
     <h2>32 levels, two worlds, two bosses</h2>
     <div class="worlds">
-      <div class="world"><img src="img/01-title.jpg" alt="" loading="lazy"><div><h3>World 1 · Emerald Jungle</h3><p>16 levels of scaffolds, lookouts and patrols, ending at Chief Grukka's camp.</p></div></div>
-      <div class="world"><img src="img/06-swamp-map.jpg" alt="" loading="lazy"><div><h3>World 2 · Mangrove Swamp</h3><p>Stilt villages, black water and the Bog Witch waiting at the lantern ring.</p></div></div>
+      <div class="world"><img src="img/world-jungle.jpg" alt="" loading="lazy" width="1120" height="630"><div><h3>World 1 · Emerald Jungle</h3><p>16 levels of scaffolds, lookouts and patrols, ending at Chief Grukka's camp.</p></div></div>
+      <div class="world"><img src="img/world-swamp.jpg" alt="" loading="lazy" width="1120" height="630"><div><h3>World 2 · Mangrove Swamp</h3><p>Stilt villages, black water and the Bog Witch waiting at the lantern ring.</p></div></div>
     </div>
   </div>
 </section>
