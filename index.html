@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jungle Reaper: Stealth Assassin</title>
-<meta name="description" content="A hand-painted stealth platformer for Android. Hide in the bushes, hang beneath the guards' walkways and strike from the shadows.">
+<meta name="description" content="A stealth platformer for Android. Hang beneath the guards' walkways, swing across the canopy and strike from the shadows, or spare them. 128 levels across eight painted worlds.">
 <meta property="og:title" content="Jungle Reaper">
-<meta property="og:description" content="Hide. Hang. Strike from the shadows. A hand-painted stealth platformer for your phone.">
+<meta property="og:description" content="Spare or kill. Sneak, swing and strike across eight painted worlds.">
 <meta property="og:image" content="https://jungle.ironfield.site/img/og.jpg">
 <meta property="og:url" content="https://jungle.ironfield.site/">
 <meta name="twitter:card" content="summary_large_image">
@@ -18,7 +18,7 @@
 <style>
 :root{
   --bg:#0f1d12; --bg2:#13261a; --panel:#1a3122; --panel2:#213d2a; --line:#36573f;
-  --gold:#e8b04a; --gold2:#ffd27a; --leaf:#7cc35a; --blood:#c8323a;
+  --gold:#e8b04a; --gold2:#ffd27a; --leaf:#7cc35a; --blood:#c8323a; --fang:#b78cff;
   --text:#f3ecd8; --soft:#cfd8c0; --mute:#93a58e;
   --r:18px; --max:1180px;
 }
@@ -35,7 +35,7 @@ h2{font-size:clamp(28px,4vw,40px);color:var(--gold2)}
 .hero{position:relative;min-height:min(88vh,860px);display:flex;align-items:center;
   background:linear-gradient(180deg,rgba(15,29,18,0) 58%,var(--bg) 99%),linear-gradient(90deg,rgba(10,20,12,.7) 0%,rgba(10,20,12,.32) 42%,rgba(10,20,12,0) 68%),linear-gradient(180deg,rgba(15,29,18,.1),rgba(15,29,18,.25)),url(img/hero.jpg) center 35%/cover no-repeat}
 .hero .wrap{padding-top:64px;padding-bottom:64px;width:100%}
-.hero-card{max-width:560px}
+.hero-card{max-width:580px}
 .logo{width:min(520px,90vw);filter:drop-shadow(0 8px 24px rgba(0,0,0,.55))}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(15,29,18,.72);border:1px solid var(--line);
   border-radius:99px;padding:6px 14px;font-weight:600;font-size:14px;color:var(--soft);margin-top:10px}
@@ -48,6 +48,8 @@ h2{font-size:clamp(28px,4vw,40px);color:var(--gold2)}
 .btn.play small{display:block;font-size:11px;font-weight:500;color:#ccc;line-height:1.1}
 .btn.play b{display:block;font-size:18px;line-height:1.1}
 .btn.ghost{background:rgba(15,29,18,.7);border:1px solid var(--gold);color:var(--gold2)}
+.stats{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:22px;color:var(--soft);font-weight:600;text-shadow:0 2px 8px rgba(0,0,0,.8)}
+.stats b{font-family:"Lilita One",system-ui,sans-serif;font-weight:400;font-size:26px;color:var(--gold2);margin-right:6px}
 
 /* sections */
 section{padding:72px 0}
@@ -58,32 +60,52 @@ section{padding:72px 0}
 .feat p{margin:0;color:var(--soft)}
 .feat .ico{width:56px;height:56px;margin-bottom:10px;border-radius:12px;box-shadow:0 0 0 1px var(--line)}
 
+.story{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center}
+.story figure{margin:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+.story img{aspect-ratio:16/9;width:100%;object-fit:cover}
+.story p{color:var(--soft);font-size:17px;margin:12px 0 0}
+.story .quote{font-style:italic;color:var(--fang);font-size:18px}
+.story ul{margin:14px 0 0;padding-left:20px;color:var(--soft)}
+.story li{margin:4px 0}
+
 .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:30px}
 .gallery img{aspect-ratio:16/9;width:100%;object-fit:cover}
 .gallery figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--panel)}
+.gallery figure.wide{grid-column:1/-1}
 .gallery figcaption{padding:10px 14px;color:var(--soft);font-size:15px}
 
-.worlds{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:30px}
-.world{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:16/9;display:flex;align-items:flex-end;border:1px solid var(--line)}
-.world img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.world div{position:relative;width:100%;padding:56px 18px 16px;background:linear-gradient(0deg,rgba(8,16,10,.96) 0%,rgba(8,16,10,.8) 55%,rgba(8,16,10,0) 100%);text-shadow:0 1px 6px rgba(0,0,0,.9)}
-.world h3{font-size:24px;color:var(--gold2)}
-.world p{margin:2px 0 0;color:var(--soft)}
+.worlds{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:30px}
+.world{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel))}
+.world img{aspect-ratio:16/9;width:100%;object-fit:cover;border-bottom:1px solid var(--line)}
+.world div{padding:12px 16px 16px}
+.world small{display:block;color:var(--mute);font-weight:600;font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+.world h3{font-size:22px;color:var(--gold2)}
+.world p{margin:2px 0 0;color:var(--soft);font-size:15px;line-height:1.45}
+.world .boss{color:var(--text);font-weight:600}
+
+.more{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:30px}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.card img{aspect-ratio:16/9;width:100%;object-fit:cover;border-bottom:1px solid var(--line)}
+.card div{padding:18px 20px 20px}
+.card h3{font-size:22px;color:var(--gold2);margin-bottom:6px}
+.card p{margin:0;color:var(--soft)}
 
 .join{background:linear-gradient(180deg,var(--bg2),var(--bg));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .join .box{max-width:720px}
 .join p{color:var(--soft);font-size:18px}
+.join .fine{font-size:15px;color:var(--mute)}
 
 footer{padding:36px 0 48px;color:var(--mute);font-size:14px}
 footer .row{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center}
 footer nav{display:flex;flex-wrap:wrap;gap:18px}
 footer a{color:var(--soft);text-decoration:none}
 footer a:hover{color:var(--gold2)}
+@media (max-width:820px){ .story{grid-template-columns:1fr;gap:20px} }
 @media (max-width:640px){ section{padding:48px 0} .hero{min-height:auto;background-position:30% 35%} .hero .wrap{padding-top:40px;padding-bottom:40px}
   .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,12,.35) 70%,rgba(10,20,12,0))} .hero .wrap{position:relative}
   .gallery{grid-template-columns:1fr} .features{gap:12px}
   .feat{display:grid;grid-template-columns:56px 1fr;column-gap:14px;padding:16px} .feat .ico{grid-row:span 2;margin:0} .feat h3{align-self:end;margin:0}
-  .world{aspect-ratio:4/3} }
+  .stats b{font-size:22px} }
 </style>
 </head>
 <body>
@@ -92,8 +114,8 @@ footer a:hover{color:var(--gold2)}
   <div class="wrap">
     <div class="hero-card">
       <img class="logo" src="img/logo.png" alt="Jungle Reaper" width="720" height="440">
-      <span class="eyebrow"><i></i>Android · internal test now</span>
-      <p class="lede">Kai is the last of the Reapers. Hide in the bushes, hang beneath the guards' walkways, wait for the turn of a back, and <b>strike from the shadows</b>.</p>
+      <span class="eyebrow"><i></i>Android · closed test on Google Play</span>
+      <p class="lede">Raiders took Kai's sister. To bring her home he carries the Reaper's Fang, a cursed blade that feeds on the lives it takes. Hang beneath the guards' walkways, swing across the canopy and <b>strike from the shadows</b>, or let them sleep.</p>
       <div class="ctas">
         <a class="btn play" href="#join" aria-label="Coming soon on Google Play">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34a853" d="M3.6 1.8 13.4 12 3.6 22.2c-.4-.2-.6-.6-.6-1.1V2.9c0-.5.2-.9.6-1.1z"/><path fill="#fbbc04" d="M16.7 15.3 13.4 12l3.3-3.3 3.9 2.2c.9.5.9 1.7 0 2.2z"/><path fill="#4285f4" d="M16.7 8.7 13.4 12 3.6 1.8c.3-.2.8-.2 1.2 0z"/><path fill="#ea4335" d="M16.7 15.3 4.8 22.2c-.4.2-.9.2-1.2 0L13.4 12z"/></svg>
@@ -101,42 +123,81 @@ footer a:hover{color:var(--gold2)}
         </a>
         <a class="btn ghost" href="#gallery">See it in action</a>
       </div>
+      <div class="stats"><span><b>128</b>levels</span><span><b>8</b>worlds</span><span><b>9</b>bosses</span><span><b>2</b>endings</span></div>
     </div>
   </div>
 </header>
 
 <section id="game" style="padding-top:24px">
   <div class="wrap">
-    <h2>A stealth assassin in a living jungle</h2>
+    <h2>Every guard he spares or kills decides who he becomes</h2>
     <p class="intro">Every guard has eyes and ears. Run and they hear you; stand in their sight and the “?” turns into “!” fast. Patience, timing and the wooden scaffolds of the jungle are your weapons.</p>
     <div class="features">
-      <div class="feat"><img class="ico" src="img/ic-hide.png" alt="" width="56" height="56"><h3>Hide</h3><p>Melt into the bushes, sneak low and quiet, dive into the swamp to vanish beneath the surface.</p></div>
-      <div class="feat"><img class="ico" src="img/ic-hang.png" alt="" width="56" height="56"><h3>Hang</h3><p>Dangle beneath a walkway while a patrol steps over your hands, then pull him down into the dark.</p></div>
-      <div class="feat"><img class="ico" src="img/ic-strike.png" alt="" width="56" height="56"><h3>Strike</h3><p>Silent takedowns from behind, from above and from below. Take a whole squad, one by one.</p></div>
-      <div class="feat"><img class="ico" src="img/ic-run.png" alt="" width="56" height="56"><h3>Run the canopy</h3><p>Leap the scaffolds, climb lianas, swing across chasms, wall-jump and roll out of the drop.</p></div>
+      <div class="feat"><img class="ico" src="img/ic-hide.png" alt="" width="56" height="56"><h3>Hide</h3><p>Melt into the bushes, sneak low and quiet, dive out of a patrol's sight and swim the flooded passages under the rock.</p></div>
+      <div class="feat"><img class="ico" src="img/ic-hang.png" alt="" width="56" height="56"><h3>Hang</h3><p>Dangle beneath a walkway while a patrol steps over your hands, then climb up behind him, or pull him down into the dark.</p></div>
+      <div class="feat"><img class="ico" src="img/ic-strike.png" alt="" width="56" height="56"><h3>Strike, or spare</h3><p>Silent takedowns from behind and from above. Or put a guard to sleep with the Sleeper Hold or a dart, and hope no comrade wakes him.</p></div>
+      <div class="feat"><img class="ico" src="img/ic-run.png" alt="" width="56" height="56"><h3>Run the canopy</h3><p>Leap the scaffold decks, climb lianas, swing across gaps and slide down ziplines onto the guards below.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="story" style="padding-top:0">
+  <div class="wrap story">
+    <figure><img src="img/story.jpg" alt="Mother Ayo, dying in the ashes of the village, gives Kai the Reaper's Fang" loading="lazy" width="1280" height="720"></figure>
+    <div>
+      <h2>The Reaper's Fang</h2>
+      <p class="quote">“Every soul you take, the Fang keeps a piece of you.”</p>
+      <p>Raiders with muskets they never had before burned Kai's river village and dragged his sister Lira away in chains. Dying in the ashes, Mother Ayo gave him the tribe's forbidden relic. Behind the raids stands a foreign colonel, buying captives to dig for the Heart of the Jungle.</p>
+      <ul>
+        <li>Throw the Fang: three throws in every level.</li>
+        <li>Fall with the Fang fed, and it gives you the moment back.</li>
+        <li>Light Fang stones along the way to hold your place.</li>
+        <li>What you feed it, or refuse it, leads to one of two endings.</li>
+      </ul>
     </div>
   </div>
 </section>
 
 <section id="gallery" style="padding-top:0">
   <div class="wrap">
-    <h2>Hand-painted, alive</h2>
-    <p class="intro">Wind in the canopy, birds and fireflies, sunsets and moonlit camps. Every scene is painted by hand.</p>
+    <h2>See it in action</h2>
+    <p class="intro">Painted worlds that move: wind in the canopy, fireflies, blizzards and spirit mist, with music and ambience for every land.</p>
     <div class="gallery">
-      <figure><img src="img/02-jungle.jpg" alt="Kai sneaking past a guard in the Emerald Jungle" loading="lazy" width="1280" height="720"><figcaption>The Emerald Jungle</figcaption></figure>
-      <figure><img src="img/03-boss.jpg" alt="Chief Grukka's camp" loading="lazy" width="1280" height="720"><figcaption>Chief Grukka's camp</figcaption></figure>
-      <figure><img src="img/04-swamp.jpg" alt="Kai hiding in the Mangrove Swamp" loading="lazy" width="1280" height="720"><figcaption>The Mangrove Swamp: dive to hide, mind the crocs</figcaption></figure>
-      <figure><img src="img/05-camp.jpg" alt="The Reapers' camp: arena, skills, shop" loading="lazy" width="1280" height="720"><figcaption>The camp: blades, skills and kill moves</figcaption></figure>
+      <figure class="wide"><img src="img/shot-zip.jpg" alt="Kai slides down a diagonal zipline above guards in the Lost Temple" loading="lazy" width="1280" height="720"><figcaption>The Lost Temple: slide down a zipline onto the guard below</figcaption></figure>
+      <figure><img src="img/shot-hang.jpg" alt="Kai hangs below an ice archer on a frosted scaffold" loading="lazy" width="1280" height="720"><figcaption>Frozen Peaks: hang beneath an archer's scaffold</figcaption></figure>
+      <figure><img src="img/shot-swing.jpg" alt="Kai swings on a liana over a deep gap in the Emerald Jungle" loading="lazy" width="1280" height="720"><figcaption>Emerald Jungle: swing across the gap</figcaption></figure>
+      <figure><img src="img/shot-pull.jpg" alt="Kai climbs onto a wooden platform and strikes a guard from behind" loading="lazy" width="1280" height="720"><figcaption>Climb up behind him and strike</figcaption></figure>
+      <figure><img src="img/shot-mercy.jpg" alt="Kai spares a guard with the Sleeper Hold above the Mangrove Swamp" loading="lazy" width="1280" height="720"><figcaption>Mangrove Swamp: the Sleeper Hold spares a life</figcaption></figure>
+      <figure><img src="img/shot-boss.jpg" alt="Chief Grukka falls through his rotten bridge into a crocodile pool" loading="lazy" width="1280" height="720"><figcaption>Chief Grukka's war camp: turn his rotten bridge against him</figcaption></figure>
+      <figure><img src="img/shot-spirit.jpg" alt="Kai in the violet mist of the Spirit Realm" loading="lazy" width="1280" height="720"><figcaption>The Spirit Realm</figcaption></figure>
     </div>
   </div>
 </section>
 
 <section id="worlds" style="padding-top:0">
   <div class="wrap">
-    <h2>32 levels, two worlds, two bosses</h2>
+    <h2>128 levels, eight worlds, nine bosses</h2>
+    <p class="intro">Follow the chain of captives from the Emerald Jungle to the Spirit Realm. Five boss fights let you turn the arena against your enemy: rotten bridges, rolling boulders, quicksand, erupting vents and spirit portals.</p>
     <div class="worlds">
-      <div class="world"><img src="img/world-jungle.jpg" alt="" loading="lazy" width="1120" height="630"><div><h3>World 1 · Emerald Jungle</h3><p>16 levels of scaffolds, lookouts and patrols, ending at Chief Grukka's camp.</p></div></div>
-      <div class="world"><img src="img/world-swamp.jpg" alt="" loading="lazy" width="1120" height="630"><div><h3>World 2 · Mangrove Swamp</h3><p>Stilt villages, black water and the Bog Witch waiting at the lantern ring.</p></div></div>
+      <div class="world"><img src="img/world-jungle.jpg" alt="" loading="lazy" width="1120" height="630"><div><small>World 1</small><h3>Emerald Jungle</h3><p>Scaffold towers, lookouts and the Red Thorn tribe's patrols. <span class="boss">Boss: Chief Grukka.</span></p></div></div>
+      <div class="world"><img src="img/world-swamp.jpg" alt="" loading="lazy" width="1120" height="630"><div><small>World 2</small><h3>Mangrove Swamp</h3><p>Stilt villages, black water and crocodiles. <span class="boss">Boss: the Bog Witch.</span></p></div></div>
+      <div class="world"><img src="img/world-temple.jpg" alt="" loading="lazy" width="1120" height="630"><div><small>World 3</small><h3>Lost Temple</h3><p>Pillared halls, ziplines and stone guardians. <span class="boss">Boss: the Stone Idol.</span></p></div></div>
+      <div class="world"><img src="img/world-highlands.jpg" alt="" loading="lazy" width="1120" height="630"><div><small>World 4</small><h3>Misty Highlands</h3><p>Hound handlers, and a wind that carries your steps. <span class="boss">Boss: Warlord Taro.</span></p></div></div>
+      <div class="world"><img src="img/world-canyon.jpg" alt="" loading="lazy" width="1120" height="630"><div><small>World 5</small><h3>Sunscorch Canyon</h3><p>Mesas, quicksand pans and dust storms. <span class="boss">Boss: the Scorpion King.</span></p></div></div>
+      <div class="world"><img src="img/world-volcano.jpg" alt="" loading="lazy" width="1120" height="630"><div><small>World 6</small><h3>Ember Volcano</h3><p>Lava, and steam vents that throw you high. <span class="boss">Boss: the Fire Shaman.</span></p></div></div>
+      <div class="world"><img src="img/world-peaks.jpg" alt="" loading="lazy" width="1120" height="630"><div><small>World 7</small><h3>Frozen Peaks</h3><p>Ice that keeps no footprints, crevasses and blizzards. <span class="boss">Boss: the Frost Giant.</span></p></div></div>
+      <div class="world"><img src="img/world-spirit.jpg" alt="" loading="lazy" width="1120" height="630"><div><small>World 8</small><h3>Spirit Realm</h3><p>Violet mist and floating isles. <span class="boss">Bosses: Colonel Blackwood and the Reaper's Shadow.</span></p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="more" style="padding-top:0">
+  <div class="wrap">
+    <h2>Beyond the story</h2>
+    <div class="more">
+      <div class="card"><img src="img/camp.jpg" alt="The hidden camp in the giant roots" loading="lazy" width="1280" height="720"><div><h3>The camp</h3><p>Spend the souls you collect on moves, skills, weapons and outfits. The camp grows as Kai frees people.</p></div></div>
+      <div class="card"><img src="img/hunt.jpg" alt="The Watchtower's Daily Hunt" loading="lazy" width="1280" height="720"><div><h3>The Watchtower</h3><p>A Daily Hunt: a level you beat, from the other side, at another time of day, with a bounty and a streak. Or the Endless Hunt: one life, hunt after hunt.</p></div></div>
+      <div class="card"><img src="img/builder.jpg" alt="The Old Fort's level builder" loading="lazy" width="1280" height="720"><div><h3>The Old Fort</h3><p>Build your own levels from every world's pieces and guards, beat them, share them, and play the ones other hunters made.</p></div></div>
     </div>
   </div>
 </section>
@@ -145,8 +206,9 @@ footer a:hover{color:var(--gold2)}
   <div class="wrap">
     <div class="box">
       <h2>Play it early</h2>
-      <p>Jungle Reaper is in internal testing on Google Play. Want in? Write to <a href="mailto:nikayroo@gmail.com?subject=Jungle%20Reaper%20testing">nikayroo@gmail.com</a> with the Google account you use on your phone.</p>
-      <p>Optional rewarded ads only. No purchases. No account. The story plays offline.</p>
+      <p>Jungle Reaper is in closed testing on Google Play. Want in? Write to <a href="mailto:nikayroo@gmail.com?subject=Jungle%20Reaper%20testing">nikayroo@gmail.com</a> with the Google account you use on your phone, and we'll add you to the testers.</p>
+      <p>Already on the list? <a href="https://play.google.com/apps/testing/com.annatar3.junglereaper">Join the test on Google Play</a>.</p>
+      <p class="fine">Optional rewarded ads only. No purchases. No account. The story plays offline; shared levels need an internet connection.</p>
     </div>
   </div>
 </section>
